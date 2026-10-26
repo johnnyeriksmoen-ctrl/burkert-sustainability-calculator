@@ -18,7 +18,7 @@ export default function FinancialAnalysis({ results, inputs }: FinancialAnalysis
   return (
     <div>
       <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3 flex items-center gap-2">
-        <Wallet size={16} className="text-burkert-600" />
+        <Wallet size={16} className="text-betaburka-600" />
         Financial Analysis
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -73,11 +73,11 @@ interface FinancialCardProps {
 function FinancialCard({ icon, label, value, sublabel, color }: FinancialCardProps) {
   const colorMap = {
     blue: {
-      bg: 'bg-burkert-50',
-      text: 'text-burkert-700',
-      border: 'border-burkert-100',
-      gradient: 'from-burkert-50 to-white',
-      valueText: 'text-burkert-800',
+      bg: 'bg-betaburka-50',
+      text: 'text-betaburka-700',
+      border: 'border-betaburka-100',
+      gradient: 'from-betaburka-50 to-white',
+      valueText: 'text-betaburka-800',
     },
     green: {
       bg: 'bg-eco-50',
