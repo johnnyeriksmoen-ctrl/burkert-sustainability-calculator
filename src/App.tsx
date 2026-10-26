@@ -46,7 +46,7 @@ function App() {
                 <Factory size={22} className="text-burkert-700" />
               </div>
               <div>
-                <h1 className="text-white font-bold text-lg leading-tight">BÜRKERT</h1>
+                <h1 className="text-white font-bold text-lg leading-tight">BetaBurka</h1>
                 <p className="text-burkert-200 text-xs leading-tight">Sustainability Value Calculator</p>
               </div>
             </div>
@@ -124,7 +124,7 @@ function App() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <Factory size={18} className="text-burkert-400" />
-              <span className="text-sm font-medium">Bürkert Fluid Control Systems</span>
+              <span className="text-sm font-medium">BetaBurka Fluid Control Systems</span>
             </div>
             <p className="text-xs text-burkert-300">
               CO₂ factor: {selectedCountry.co2Factor} kg/kWh ({selectedCountry.name}) · Embodied carbon + recyclability per material · Estimates are indicative only
