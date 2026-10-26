@@ -13,8 +13,8 @@ import {
   formatNumber,
 } from './calculator';
 
-const BURKERT_BLUE: [number, number, number] = [0, 107, 179];
-const BURKERT_DARK: [number, number, number] = [0, 80, 133];
+const betaburka_BLUE: [number, number, number] = [0, 107, 179];
+const betaburka_DARK: [number, number, number] = [0, 80, 133];
 const LIGHT_GRAY: [number, number, number] = [245, 247, 250];
 const MID_GRAY: [number, number, number] = [107, 114, 128];
 const DARK_GRAY: [number, number, number] = [31, 41, 55];
@@ -69,16 +69,16 @@ export function generatePDFReport(
   const light = getTrafficLight(results);
 
   // ==================== COVER PAGE ====================
-  doc.setFillColor(...BURKERT_BLUE);
+  doc.setFillColor(...betaburka_BLUE);
   doc.rect(0, 0, pageW, 120, 'F');
 
-  doc.setFillColor(...BURKERT_DARK);
+  doc.setFillColor(...betaburka_DARK);
   doc.rect(0, 120, pageW, 6, 'F');
 
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text('BÜRKERT', margin, 50);
+  doc.text('betaburka', margin, 50);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.text('Fluid Control Systems', margin, 64);
@@ -92,7 +92,7 @@ export function generatePDFReport(
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GRAY);
   doc.text('A comprehensive evaluation of sustainability performance', margin, 268);
-  doc.text('and investment justification for Bürkert solutions', margin, 282);
+  doc.text('and investment justification for betaburka solutions', margin, 282);
 
   // Customer info box
   const boxY = 330;
@@ -101,7 +101,7 @@ export function generatePDFReport(
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('PREPARED FOR', margin + 20, boxY + 25);
 
   doc.setFontSize(12);
@@ -110,7 +110,7 @@ export function generatePDFReport(
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('PROJECT', margin + 20, boxY + 62);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
@@ -119,7 +119,7 @@ export function generatePDFReport(
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('SALES ENGINEER', margin + 20, boxY + 98);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
@@ -134,7 +134,7 @@ export function generatePDFReport(
   });
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('DATE GENERATED', pageW - margin - 140, boxY + 25);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
@@ -143,7 +143,7 @@ export function generatePDFReport(
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('PRODUCT', pageW - margin - 140, boxY + 62);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
@@ -152,7 +152,7 @@ export function generatePDFReport(
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('COUNTRY / GRID', pageW - margin - 140, boxY + 98);
   doc.setFontSize(11);
   doc.setFont('helvetica', 'normal');
@@ -176,7 +176,7 @@ export function generatePDFReport(
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GRAY);
   doc.text('Confidential — For internal and customer use only', margin, pageH - 30);
-  doc.text('Bürkert Sustainability Value Calculator', pageW - margin - 180, pageH - 30);
+  doc.text('betaburka Sustainability Value Calculator', pageW - margin - 180, pageH - 30);
 
   // ==================== PAGE 2: EXECUTIVE SUMMARY ====================
   doc.addPage();
@@ -188,11 +188,11 @@ export function generatePDFReport(
   // KPI blocks
   const kpiData = [
     { label: 'Sustainability Grade', value: `Grade ${results.sustainabilityGrade}`, sub: results.scoreLabel, rgb: hexToRgb(results.scoreColor) },
-    { label: 'Annual Energy Savings', value: formatEnergy(results.annualEnergySavings), sub: `${formatNumber(results.energyReductionPct, 1)}% reduction`, rgb: BURKERT_BLUE },
+    { label: 'Annual Energy Savings', value: formatEnergy(results.annualEnergySavings), sub: `${formatNumber(results.energyReductionPct, 1)}% reduction`, rgb: betaburka_BLUE },
     { label: 'Annual CO₂ Reduction', value: formatCO2(results.annualCO2Reduction), sub: `${formatNumber(results.co2ReductionPct, 1)}% reduction`, rgb: MID_GRAY },
     { label: 'Annual Cost Savings', value: results.hasPositiveBusinessCase ? formatCurrency(results.annualCostSavings) : 'N/A', sub: results.hasPositiveBusinessCase ? `${formatNumber(results.costReductionPct, 1)}% reduction` : 'No savings', rgb: results.hasPositiveBusinessCase ? GREEN : RED },
     { label: 'Lifetime Savings', value: results.hasPositiveBusinessCase ? formatCurrency(results.lifetimeCostSavings) : 'N/A', sub: `over ${inputs.lifetime} years`, rgb: results.hasPositiveBusinessCase ? GREEN : MID_GRAY },
-    { label: 'Payback Period', value: results.hasValidPayback ? `${formatNumber(results.paybackYears, 1)} years` : 'N/A', sub: results.hasValidPayback ? 'break-even point' : results.hasPositiveBusinessCase ? 'exceeds product lifetime' : 'No business case', rgb: results.hasValidPayback ? BURKERT_BLUE : RED },
+    { label: 'Payback Period', value: results.hasValidPayback ? `${formatNumber(results.paybackYears, 1)} years` : 'N/A', sub: results.hasValidPayback ? 'break-even point' : results.hasPositiveBusinessCase ? 'exceeds product lifetime' : 'No business case', rgb: results.hasValidPayback ? betaburka_BLUE : RED },
     { label: 'ROI', value: results.hasPositiveBusinessCase ? `${formatNumber(results.roiPercent, 0)}%` : 'N/A', sub: `over ${inputs.lifetime} years`, rgb: results.hasPositiveBusinessCase ? GREEN : RED },
     { label: 'Traffic Light', value: light.label, sub: 'investment status', rgb: light.rgb },
   ];
@@ -235,7 +235,7 @@ export function generatePDFReport(
   doc.roundedRect(margin, y, pageW - margin * 2, 12, 3, 3, 'F');
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('MANAGEMENT RECOMMENDATION', margin + 10, y + 8);
 
   y += 24;
@@ -267,7 +267,7 @@ export function generatePDFReport(
     doc.roundedRect(margin, y, pageW - margin * 2, 12, 3, 3, 'F');
     doc.setFontSize(9);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...BURKERT_BLUE);
+    doc.setTextColor(...betaburka_BLUE);
     doc.text('REPORT NOTES', margin + 10, y + 8);
     y += 24;
     doc.setFontSize(9);
@@ -287,7 +287,7 @@ export function generatePDFReport(
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('Product Configuration', margin, y);
   y += 8;
 
@@ -308,7 +308,7 @@ export function generatePDFReport(
       ['Investment Cost', formatCurrency(inputs.investmentCost)],
     ],
     theme: 'striped',
-    headStyles: { fillColor: BURKERT_BLUE, fontSize: 8, textColor: [255, 255, 255] },
+    headStyles: { fillColor: betaburka_BLUE, fontSize: 8, textColor: [255, 255, 255] },
     bodyStyles: { fontSize: 8, textColor: DARK_GRAY },
     alternateRowStyles: { fillColor: [248, 250, 252] },
     margin: { left: margin, right: margin },
@@ -319,7 +319,7 @@ export function generatePDFReport(
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('Sustainability Results', margin, y);
   y += 8;
 
@@ -337,7 +337,7 @@ export function generatePDFReport(
       ['Sustainability Grade', `Grade ${results.sustainabilityGrade}`, results.scoreLabel],
     ],
     theme: 'striped',
-    headStyles: { fillColor: BURKERT_BLUE, fontSize: 8, textColor: [255, 255, 255] },
+    headStyles: { fillColor: betaburka_BLUE, fontSize: 8, textColor: [255, 255, 255] },
     bodyStyles: { fontSize: 8, textColor: DARK_GRAY },
     alternateRowStyles: { fillColor: [248, 250, 252] },
     margin: { left: margin, right: margin },
@@ -354,13 +354,13 @@ export function generatePDFReport(
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
-  doc.text('Existing Solution vs Bürkert Solution', margin, y);
+  doc.setTextColor(...betaburka_BLUE);
+  doc.text('Existing Solution vs betaburka Solution', margin, y);
   y += 8;
 
   autoTable(doc, {
     startY: y,
-    head: [['Metric', 'Existing Solution', 'Bürkert Solution', 'Improvement']],
+    head: [['Metric', 'Existing Solution', 'betaburka Solution', 'Improvement']],
     body: [
       [
         'Energy Use',
@@ -382,7 +382,7 @@ export function generatePDFReport(
       ],
     ],
     theme: 'striped',
-    headStyles: { fillColor: BURKERT_BLUE, fontSize: 8, textColor: [255, 255, 255] },
+    headStyles: { fillColor: betaburka_BLUE, fontSize: 8, textColor: [255, 255, 255] },
     bodyStyles: { fontSize: 8, textColor: DARK_GRAY },
     alternateRowStyles: { fillColor: [248, 250, 252] },
     margin: { left: margin, right: margin },
@@ -394,15 +394,15 @@ export function generatePDFReport(
   // Financial analysis KPI cards
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text('Financial Analysis', margin, y);
   y += 16;
 
   const finKPIs = [
-    { label: 'Investment Cost', value: formatCurrency(inputs.investmentCost), rgb: BURKERT_BLUE },
+    { label: 'Investment Cost', value: formatCurrency(inputs.investmentCost), rgb: betaburka_BLUE },
     { label: 'Annual Savings', value: results.hasPositiveBusinessCase ? formatCurrency(results.annualCostSavings) : 'N/A', rgb: results.hasPositiveBusinessCase ? GREEN : RED },
     { label: 'Lifetime Savings', value: results.hasPositiveBusinessCase ? formatCurrency(results.lifetimeCostSavings) : 'N/A', rgb: results.hasPositiveBusinessCase ? GREEN : MID_GRAY },
-    { label: 'Payback Period', value: results.hasValidPayback ? `${formatNumber(results.paybackYears, 1)} yrs` : 'N/A', rgb: results.hasValidPayback ? BURKERT_BLUE : RED },
+    { label: 'Payback Period', value: results.hasValidPayback ? `${formatNumber(results.paybackYears, 1)} yrs` : 'N/A', rgb: results.hasValidPayback ? betaburka_BLUE : RED },
     { label: 'ROI', value: results.hasPositiveBusinessCase ? `${formatNumber(results.roiPercent, 0)}%` : 'N/A', rgb: results.hasPositiveBusinessCase ? GREEN : RED },
   ];
 
@@ -432,7 +432,7 @@ export function generatePDFReport(
     y += 100;
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
-    doc.setTextColor(...BURKERT_BLUE);
+    doc.setTextColor(...betaburka_BLUE);
     doc.text('Investment & Payback Analysis', margin, y);
     y += 10;
 
@@ -458,7 +458,7 @@ export function generatePDFReport(
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...DARK_GRAY);
   const introLines = doc.splitTextToSize(
-    'The Bürkert Sustainability Value Calculator estimates environmental and financial impacts using user-provided operating parameters, material selections, electricity cost assumptions and country-specific emission factors. Results are intended for decision support and comparative evaluation of alternative solutions.',
+    'The betaburka Sustainability Value Calculator estimates environmental and financial impacts using user-provided operating parameters, material selections, electricity cost assumptions and country-specific emission factors. Results are intended for decision support and comparative evaluation of alternative solutions.',
     pageW - margin * 2
   );
   doc.text(introLines, margin, y);
@@ -527,22 +527,22 @@ export function generatePDFReport(
     'This report uses: User-entered operating parameters, Generic material emission factors,',
     'Country-specific electricity emission factors, Internal calculator assumptions',
     'Where available, future versions may incorporate: Environmental Product Declarations (EPDs),',
-    'Product Carbon Footprints (PCFs), Verified Bürkert product lifecycle data',
+    'Product Carbon Footprints (PCFs), Verified betaburka product lifecycle data',
   ], pageW, margin);
 
   drawPageFooter(doc, pageW, pageH, margin, 5);
 
   // ==================== SAVE ====================
   const fileDate = new Date().toISOString().split('T')[0];
-  const fileName = `Burkert_Sustainability_Report_${customer.customerName || customer.projectName || product.id}_${fileDate}.pdf`
+  const fileName = `betaburka_Sustainability_Report_${customer.customerName || customer.projectName || product.id}_${fileDate}.pdf`
     .replace(/[^a-zA-Z0-9_\-\.]/g, '_');
   doc.save(fileName);
 }
 
 function drawPageHeader(doc: jsPDF, title: string, pageW: number, margin: number): void {
-  doc.setFillColor(...BURKERT_BLUE);
+  doc.setFillColor(...betaburka_BLUE);
   doc.rect(0, 0, pageW, 56, 'F');
-  doc.setFillColor(...BURKERT_DARK);
+  doc.setFillColor(...betaburka_DARK);
   doc.rect(0, 56, pageW, 3, 'F');
 
   doc.setTextColor(255, 255, 255);
@@ -552,7 +552,7 @@ function drawPageHeader(doc: jsPDF, title: string, pageW: number, margin: number
 
   doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
-  doc.text('Bürkert Sustainability Value Assessment', pageW - margin - 150, 36);
+  doc.text('betaburka Sustainability Value Assessment', pageW - margin - 150, 36);
 }
 
 function drawPageFooter(doc: jsPDF, pageW: number, pageH: number, margin: number, pageNum: number): void {
@@ -563,7 +563,7 @@ function drawPageFooter(doc: jsPDF, pageW: number, pageH: number, margin: number
   doc.setFontSize(7);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GRAY);
-  doc.text('Bürkert Fluid Control Systems — Confidential', margin, pageH - 22);
+  doc.text('betaburka Fluid Control Systems — Confidential', margin, pageH - 22);
   doc.text(`Page ${pageNum}`, pageW - margin - 40, pageH - 22);
   doc.text('Generated by Sustainability Value Calculator', margin, pageH - 12);
 }
@@ -580,7 +580,7 @@ function drawMethodologySection(
   doc.roundedRect(margin, y, pageW - margin * 2, 14, 3, 3, 'F');
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BURKERT_BLUE);
+  doc.setTextColor(...betaburka_BLUE);
   doc.text(heading, margin + 10, y + 9);
   y += 22;
 
@@ -629,7 +629,7 @@ function buildRecommendationText(
   const { hasPositiveBusinessCase, hasValidPayback, paybackYears, roiPercent, annualCostSavings, lifetimeCostSavings } = results;
 
   if (!hasPositiveBusinessCase) {
-    return `Based on the current configuration, switching to ${productName} (${inputs.quantity} units) in ${countryName} does not yield a positive business case. The Bürkert solution consumes similar or more power than the existing setup. Consider reviewing product selection, quantity, or operating parameters. The sustainability rating is Grade ${results.sustainabilityGrade}.`;
+    return `Based on the current configuration, switching to ${productName} (${inputs.quantity} units) in ${countryName} does not yield a positive business case. The betaburka solution consumes similar or more power than the existing setup. Consider reviewing product selection, quantity, or operating parameters. The sustainability rating is Grade ${results.sustainabilityGrade}.`;
   }
 
   if (!hasValidPayback) {
