@@ -38,16 +38,16 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <header className="bg-BetBurka-800 sticky top-0 z-30 shadow-lg">
+      <header className="bg-burkert-800 sticky top-0 z-30 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <Factory size={22} className="text-BetBurka-700" />
+                <Factory size={22} className="text-burkert-700" />
               </div>
               <div>
                 <h1 className="text-white font-bold text-lg leading-tight">BetaBurka</h1>
-                <p className="text-BetBurka-200 text-xs leading-tight">Sustainability Value Calculator</p>
+                <p className="text-burkert-200 text-xs leading-tight">Sustainability Value Calculator</p>
               </div>
             </div>
 
@@ -61,9 +61,9 @@ function App() {
       </header>
 
       {/* Sub-header banner */}
-      <div className="bg-gradient-to-r from-BetBurka-700 to-BetBurka-600">
+      <div className="bg-gradient-to-r from-burkert-700 to-burkert-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-BetBurka-50 text-xs">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-burkert-50 text-xs">
             <span className="flex items-center gap-1.5">
               <Gauge size={14} /> {selectedProduct.name}
             </span>
@@ -119,14 +119,14 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-BetBurka-900 text-BetBurka-200 py-6 mt-auto">
+      <footer className="bg-burkert-900 text-burkert-200 py-6 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Factory size={18} className="text-BetBurka-400" />
+              <Factory size={18} className="text-burkert-400" />
               <span className="text-sm font-medium">BetaBurka Fluid Control Systems</span>
             </div>
-            <p className="text-xs text-BetBurka-300">
+            <p className="text-xs text-burkert-300">
               CO₂ factor: {selectedCountry.co2Factor} kg/kWh ({selectedCountry.name}) · Embodied carbon + recyclability per material · Estimates are indicative only
             </p>
           </div>
@@ -145,9 +145,9 @@ function formatTons(tons: number): string {
 function HeaderStat({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-BetBurka-300">{icon}</span>
+      <span className="text-burkert-300">{icon}</span>
       <div className="leading-tight">
-        <p className="text-[10px] text-BetBurka-300 uppercase tracking-wide">{label}</p>
+        <p className="text-[10px] text-burkert-300 uppercase tracking-wide">{label}</p>
         <p className="text-sm font-semibold text-white">{value}</p>
       </div>
     </div>
