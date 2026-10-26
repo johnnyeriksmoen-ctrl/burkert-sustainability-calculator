@@ -58,7 +58,7 @@ export default function ResultsPanel({ results, inputs, customer }: ResultsPanel
         <button
           onClick={handleGeneratePDF}
           disabled={generating}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-burkert-600 text-white rounded-lg font-semibold text-sm hover:bg-burkert-700 transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-betaburka-600 text-white rounded-lg font-semibold text-sm hover:bg-betaburka-700 transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {generating ? (
             <>
@@ -92,14 +92,14 @@ export default function ResultsPanel({ results, inputs, customer }: ResultsPanel
             label="Annual Energy"
             value={formatEnergy(results.annualEnergyTotal)}
             sublabel={`${formatNumber(results.annualEnergyPerUnit, 1)} kWh/unit`}
-            color="burkert"
+            color="betaburka"
           />
           <MetricCard
             icon={<Calendar size={20} />}
             label="Lifetime Energy"
             value={formatEnergy(results.lifetimeEnergyTotal)}
             sublabel={`${inputs.lifetime} years total`}
-            color="burkert"
+            color="betaburka"
           />
           <MetricCard
             icon={<Euro size={20} />}
@@ -179,7 +179,7 @@ interface MetricCardProps {
   label: string;
   value: string;
   sublabel: string;
-  color: 'burkert' | 'carbon' | 'cost' | 'embodied';
+  color: 'betaburka' | 'carbon' | 'cost' | 'embodied';
 }
 
 function MetricCard({ icon, label, value, sublabel, color }: MetricCardProps) {
@@ -192,7 +192,7 @@ function MetricCard({ icon, label, value, sublabel, color }: MetricCardProps) {
   }, [value]);
 
   const colorMap = {
-    burkert: { bg: 'bg-burkert-50', text: 'text-burkert-700', border: 'border-burkert-100' },
+    betaburka: { bg: 'bg-betaburka-50', text: 'text-betaburka-700', border: 'border-betaburka-100' },
     carbon: { bg: 'bg-gray-50', text: 'text-gray-700', border: 'border-gray-200' },
     cost: { bg: 'bg-eco-50', text: 'text-eco-700', border: 'border-eco-100' },
     embodied: { bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-100' },
