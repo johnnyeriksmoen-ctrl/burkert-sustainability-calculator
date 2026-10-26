@@ -13,15 +13,15 @@ export interface ProductType {
 
 export const PRODUCTS: ProductType[] = [
   { id: 'solenoid-valve', name: 'Solenoid Valve', category: 'Valves', defaultPower: 12, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 0.5, defaultMaterial: 'stainless-steel', defaultExistingPower: 20, icon: 'valve' },
-  { id: 'process-valve', name: 'Process Valve', category: 'Valves', defaultPower: 24, defaultHours: 8760, defaultLifetime: 15, defaultWeight: 3.5, defaultMaterial: 'stainless-steel', defaultExistingPower: 40, icon: 'valve' },
-  { id: 'pneumatic-actuator', name: 'Pneumatic Actuator', category: 'Actuators', defaultPower: 30, defaultHours: 8000, defaultLifetime: 12, defaultWeight: 5.0, defaultMaterial: 'aluminium', defaultExistingPower: 55, icon: 'actuator' },
-  { id: 'flow-meter', name: 'Flow Meter', category: 'Sensors', defaultPower: 5, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 1.2, defaultMaterial: 'stainless-steel', defaultExistingPower: 12, icon: 'sensor' },
-  { id: 'pressure-transmitter', name: 'Pressure Transmitter', category: 'Sensors', defaultPower: 3, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 0.3, defaultMaterial: 'stainless-steel', defaultExistingPower: 8, icon: 'sensor' },
-  { id: 'temperature-sensor', name: 'Temperature Sensor', category: 'Sensors', defaultPower: 2, defaultHours: 8760, defaultLifetime: 12, defaultWeight: 0.2, defaultMaterial: 'stainless-steel', defaultExistingPower: 6, icon: 'sensor' },
+  { id: 'process-valve', name: 'Process Valve', category: 'Valves', defaultPower: 24, defaultHours: 8760, defaultLifetime: 15, defaultWeight: 3.5, defaultMaterial: 'stainless-steel', defaultExistingPower: 32, icon: 'valve' },
+  { id: 'pneumatic-actuator', name: 'Pneumatic Actuator', category: 'Actuators', defaultPower: 30, defaultHours: 8000, defaultLifetime: 12, defaultWeight: 5.0, defaultMaterial: 'aluminium', defaultExistingPower: 40, icon: 'actuator' },
+  { id: 'flow-meter', name: 'Flow Meter', category: 'Sensors', defaultPower: 5, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 1.2, defaultMaterial: 'stainless-steel', defaultExistingPower: 8, icon: 'meter' },
+  { id: 'pressure-transmitter', name: 'Pressure Transmitter', category: 'Sensors', defaultPower: 3, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 0.3, defaultMaterial: 'stainless-steel', defaultExistingPower: 6, icon: 'sensor' },
+  { id: 'temperature-sensor', name: 'Temperature Sensor', category: 'Sensors', defaultPower: 2, defaultHours: 8760, defaultLifetime: 12, defaultWeight: 0.2, defaultMaterial: 'stainless-steel', defaultExistingPower: 4, icon: 'sensor' },
   { id: 'ph-sensor', name: 'pH Sensor', category: 'Analytics', defaultPower: 4, defaultHours: 8760, defaultLifetime: 8, defaultWeight: 0.15, defaultMaterial: 'plastic', defaultExistingPower: 10, icon: 'sensor' },
-  { id: 'controller', name: 'Process Controller', category: 'Controllers', defaultPower: 15, defaultHours: 8760, defaultLifetime: 12, defaultWeight: 2.0, defaultMaterial: 'aluminium', defaultExistingPower: 30, icon: 'controller' },
-  { id: 'bus-node', name: 'Fieldbus Node', category: 'Networking', defaultPower: 8, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 0.8, defaultMaterial: 'aluminium', defaultExistingPower: 18, icon: 'controller' },
-  { id: 'air-cannon', name: 'Air Cannon System', category: 'Cleaning', defaultPower: 50, defaultHours: 2000, defaultLifetime: 15, defaultWeight: 8.0, defaultMaterial: 'aluminium', defaultExistingPower: 80, icon: 'actuator' },
+  { id: 'controller', name: 'Process Controller', category: 'Controllers', defaultPower: 15, defaultHours: 8760, defaultLifetime: 12, defaultWeight: 2.0, defaultMaterial: 'aluminium', defaultExistingPower: 20, icon: 'controller' },
+  { id: 'bus-node', name: 'Fieldbus Node', category: 'Networking', defaultPower: 8, defaultHours: 8760, defaultLifetime: 10, defaultWeight: 0.8, defaultMaterial: 'aluminium', defaultExistingPower: 12, icon: 'network' },
+  { id: 'air-cannon', name: 'Air Cannon System', category: 'Cleaning', defaultPower: 50, defaultHours: 2000, defaultLifetime: 15, defaultWeight: 8.0, defaultMaterial: 'aluminium', defaultExistingPower: 70, icon: 'system' },
 ];
 
 export interface MaterialType {
@@ -38,8 +38,10 @@ export const MATERIALS: MaterialType[] = [
   { id: 'plastic', name: 'Plastic', factor: 3.20, recyclability: 40 },
 ];
 
+const MATERIAL_BY_ID = Object.fromEntries(MATERIALS.map((material) => [material.id, material])) as Record<string, MaterialType>;
+
 export function getMaterial(id: string): MaterialType {
-  return MATERIALS.find((m) => m.id === id) || MATERIALS[0];
+  return MATERIAL_BY_ID[id] || MATERIALS[0];
 }
 
 export interface CountryType {
@@ -59,8 +61,10 @@ export const COUNTRIES: CountryType[] = [
   { id: 'eu-average', name: 'EU Average', flag: 'EU', co2Factor: 0.421, defaultPrice: 0.30 },
 ];
 
+const COUNTRY_BY_ID = Object.fromEntries(COUNTRIES.map((country) => [country.id, country])) as Record<string, CountryType>;
+
 export function getCountry(id: string): CountryType {
-  return COUNTRIES.find((c) => c.id === id) || COUNTRIES[5];
+  return COUNTRY_BY_ID[id] || COUNTRIES[5];
 }
 
 export interface CustomerInfo {
@@ -122,7 +126,18 @@ export interface CalculationResults {
 }
 
 export function calculateResults(inputs: CalculatorInputs): CalculationResults {
-  const { quantity, powerConsumption, operatingHours, lifetime, electricityPrice, material, weight, country, existingPowerConsumption, investmentCost } = inputs;
+  const {
+    quantity,
+    powerConsumption,
+    operatingHours,
+    lifetime,
+    electricityPrice,
+    material,
+    weight,
+    country,
+    existingPowerConsumption,
+    investmentCost,
+  } = inputs;
 
   const co2Factor = getCountry(country).co2Factor;
 
@@ -161,8 +176,15 @@ export function calculateResults(inputs: CalculatorInputs): CalculationResults {
     : 0;
 
   const score = computeScore(
-    powerConsumption, operatingHours, weight, mat.factor, mat.recyclability,
-    quantity, lifetime, co2Factor, lifetimeCarbon
+    powerConsumption,
+    operatingHours,
+    weight,
+    mat.factor,
+    mat.recyclability,
+    quantity,
+    lifetime,
+    co2Factor,
+    lifetimeCarbon,
   );
 
   const { label, color } = scoreInfo(score);
@@ -200,9 +222,15 @@ export function calculateResults(inputs: CalculatorInputs): CalculationResults {
 }
 
 function computeScore(
-  power: number, hours: number, weight: number, materialFactor: number,
-  recyclability: number, quantity: number, lifetime: number,
-  co2Factor: number, lifetimeCarbon: number
+  power: number,
+  hours: number,
+  weight: number,
+  materialFactor: number,
+  recyclability: number,
+  quantity: number,
+  lifetime: number,
+  co2Factor: number,
+  lifetimeCarbon: number,
 ): number {
   const annualEnergy = (power * hours) / 1000 * quantity;
   const annualCO2 = annualEnergy * co2Factor;
@@ -216,10 +244,10 @@ function computeScore(
 
   return Math.round(
     operationalScore * 0.35 +
-    lifetimeCO2Score * 0.25 +
-    materialScore * 0.20 +
-    recyclabilityScore * 0.10 +
-    lifetimeScore * 0.10
+      lifetimeCO2Score * 0.25 +
+      materialScore * 0.2 +
+      recyclabilityScore * 0.1 +
+      lifetimeScore * 0.1,
   );
 }
 
@@ -268,7 +296,7 @@ export function formatCO2(tons: number): string {
 }
 
 export function formatPct(value: number): string {
-  return `${value >= 0 ? '' : ''}${value.toFixed(1)}%`;
+  return `${value.toFixed(1)}%`;
 }
 
 export interface Equivalency {
@@ -310,7 +338,7 @@ export function getYearlyData(inputs: CalculatorInputs, results: CalculationResu
 export function checkHasValidPayback(
   paybackYears: number,
   lifetime: number,
-  hasPositiveBusinessCase: boolean
+  hasPositiveBusinessCase: boolean,
 ): boolean {
   return hasPositiveBusinessCase && paybackYears > 0 && paybackYears <= lifetime;
 }
