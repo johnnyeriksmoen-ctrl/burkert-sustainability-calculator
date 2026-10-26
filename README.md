@@ -1,4 +1,4 @@
-Bürkert Sustainability Value Calculator
+betaburka Sustainability Value Calculator
 A React + TypeScript application for evaluating the sustainability, energy efficiency, CO₂ impact, and financial performance of industrial automation products.
 
 The calculator helps engineers, sales teams, and customers quantify environmental and economic benefits when selecting more efficient fluid control solutions.
@@ -133,7 +133,7 @@ Financial analysis
 PDF reporting
 KPI dashboards
 Phase 2
-Real Bürkert product database
+Real betaburka product database
 Product comparison engine
 Product recommendation engine
 Phase 3
